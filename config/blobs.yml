@@ -1,0 +1,31 @@
+---
+libyaml_0.1.4/yaml-0.1.4.tar.gz:
+  object_id: 064dc16c-ba65-456b-af84-fd1332798ad7
+  sha: !binary |-
+    ZTBlNWUwOTE5MmFiMTBhNjA3ZTNkYTI5NzBkYjQ5MjExOGY1NjBmMg==
+  size: 471759
+064dc16c-ba65-456b-af84-fd1332798ad7:
+  object_id: de4584e6-08b5-4c8b-aa3b-77356ea6c2a5
+  sha: !binary |-
+    ZTBlNWUwOTE5MmFiMTBhNjA3ZTNkYTI5NzBkYjQ5MjExOGY1NjBmMg==
+  size: 471759
+b35359e1-d039-4d63-bb04-b22f8a148393:
+  object_id: a538b614-2001-4b38-b5c5-ebd55710ee30
+  sha: !binary |-
+    YmM4Y2JmZWE1OTQxZjM0ZTE5MDRmM2I3N2U4ZGIxMjgwOTBlMzYzYg==
+  size: 471869
+16e0bed1-bb65-43a9-b0a7-f314f1cd9687:
+  object_id: 66e48143-c4fe-4cfe-9f73-7dfef215085b
+  sha: !binary |-
+    ODE1ZDY3ZGM2NTcxMmM0MzA3ODIxNDE1OGVkNDQ2YjJhNDZjMzVmZA==
+  size: 1001
+f7e63319-abc4-4025-89a9-464653570f82:
+  object_id: 81ceec48-b2ea-4c9f-95b8-259e8a1aeef7
+  sha: !binary |-
+    MWVkNzdhNjc5NWVjMzUyMDYzNjRhODRlODM2ZWYxOGQ1MzYyNjQxNw==
+  size: 12695391
+3818cf85-a8c8-4bba-a02d-40d850d5fd7f:
+  object_id: 71c7209c-9b2f-4cc7-b346-b1553daea0b0
+  sha: !binary |-
+    MDZiNDc2OGRkMmQ1MzA2ODUxM2EzNDgwMWZiZTdhNGQxZDgwYmYzNA==
+  size: 720
