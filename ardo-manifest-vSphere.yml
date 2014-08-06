@@ -1,0 +1,66 @@
+---
+name: ardo
+director_uuid: b320d611-7673-48a2-a65e-5f1d8ec14699
+
+update:
+  canaries: 1
+  canary_watch_time: 30000-240000
+  update_watch_time: 30000-600000
+  max_in_flight: 3
+
+compilation:
+  network: cf3
+  reuse_compilation_vms: true
+  workers: 1
+  cloud_properties:
+    ram: 1024
+    disk: 8192
+    cpu: 1
+
+resource_pools:
+- name: small_z1
+  network: cf3
+  size: 1
+  stemcell:
+    name: bosh-vsphere-esxi-ubuntu
+    version: '2366'
+  cloud_properties:
+    ram: 1024
+    disk: 10000
+    cpu: 1
+
+releases:
+- name: ardo 
+  version: latest
+
+networks:
+- name: cf3
+  subnets:
+  - range: 172.16.0.1/22
+    gateway: 172.16.0.1
+    dns:
+    - 172.16.0.3
+    - 10.73.66.20
+    - 10.64.46.21
+    - 10.64.46.22
+    static:
+    - 172.16.0.102
+    reserved:
+    - 172.16.0.2-172.16.0.100
+    - 172.16.0.130-172.16.2.254
+    cloud_properties:
+      name: vxw-dvs-101-virtualwire-3-sid-5000-Internal_virtual_wire
+jobs:
+- name: web_ui 
+  templates:
+  - name: web_ui
+    release: ardo
+  instances: 1
+  resource_pool: small_z1
+  networks:
+  - name: cf3
+    static_ips : 172.16.0.102
+  properties:
+    web_ui:
+      port: 9000
+
