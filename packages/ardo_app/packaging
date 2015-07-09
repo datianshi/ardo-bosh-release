@@ -6,6 +6,6 @@ cp -a ardo_app/* ${BOSH_INSTALL_TARGET}
 cd ${BOSH_INSTALL_TARGET}
 
 /var/vcap/packages/ruby_1.9.3/bin/bundle install \
-  --path vendor/bundle
+  --path vendor/bundle \
   --deployment \
   --without development test
