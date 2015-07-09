@@ -1,0 +1,59 @@
+---
+name: ardo
+director_uuid: 48ecc33b-7661-4b13-ae4d-9b42faca99a6
+
+update:
+  canaries: 1
+  canary_watch_time: 30000-240000
+  update_watch_time: 30000-600000
+  max_in_flight: 3
+
+compilation:
+  workers: 3 # only the required number are provisioned
+  network: default
+  reuse_compilation_vms: true
+  cloud_properties:
+    instance_type: m1.large
+
+resource_pools:
+- name: small_z1
+  network: default
+  size: 1
+  stemcell:
+    name: bosh-aws-xen-ubuntu-trusty-go_agent
+    version: latest
+  cloud_properties:
+   instance_type: m1.small
+
+releases:
+- name: ardo 
+  version: latest
+
+networks:
+- name: default
+  type: manual
+  subnets:
+  - range: 10.0.0.0/24
+    gateway: 10.0.0.1
+    dns: [10.0.0.2]
+    reserved: ["10.0.0.2 - 10.0.0.10"]
+    static: ["10.0.0.11 - 10.0.0.15"]
+    cloud_properties:
+      subnet: subnet-c15d2598
+      security_groups:
+        - sding
+
+jobs:
+- name: web_ui 
+  templates:
+  - name: web_ui
+    release: ardo
+  instances: 1
+  resource_pool: small_z1
+  networks:
+  - name: default
+    static_ips : 10.0.0.12
+  properties:
+    web_ui:
+      port: 9000
+
