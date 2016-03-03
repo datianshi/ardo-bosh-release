@@ -1,0 +1,60 @@
+---
+name: ardo
+director_uuid: bc859076-17be-48d5-945e-4fdaa1deb7bd
+
+update:
+  canaries: 1
+  canary_watch_time: 30000-240000
+  update_watch_time: 30000-600000
+  max_in_flight: 3
+
+compilation:
+  network: cf3
+  reuse_compilation_vms: true
+  workers: 1
+  cloud_properties:
+    instance_type: Standard_D2
+resource_pools:
+- name: small_z1
+  network: cf3
+  stemcell:
+    name: bosh-azure-hyperv-ubuntu-trusty-go_agent
+    version: '3163'
+  cloud_properties:
+    availability_set: ardo
+    instance_type: Standard_D1
+
+releases:
+- name: ardo
+  version: latest
+
+networks:
+- name: cf3
+  subnets:
+  - range: 10.0.16.0/24
+    gateway: 10.0.16.1
+    dns:
+    - 8.8.8.8
+    static:
+    - 10.0.16.246
+    - 10.0.16.247
+    reserved:
+    - 10.0.16.2-10.0.16.245
+    cloud_properties:
+      virtual_network_name: boshvnet
+      subnet_name: cfsubnet
+jobs:
+- name: web_ui
+  templates:
+  - name: web_ui
+    release: ardo
+  instances: 2
+  resource_pool: small_z1
+  networks:
+  - name: cf3
+    static_ips:
+      - 10.0.16.246
+      - 10.0.16.247
+  properties:
+    web_ui:
+      port: 9000
