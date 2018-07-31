@@ -1,0 +1,32 @@
+---
+name: ardo
+
+stemcells:
+- alias: default
+  os: ubuntu-trusty
+  version: latest
+
+update:
+  canaries: 1
+  max_in_flight: 10
+  canary_watch_time: 1000-30000
+  update_watch_time: 1000-30000
+
+releases:
+- name: ardo
+  version: latest
+
+instance_groups:
+- name: web_ui
+  instances: 1
+  azs: [us-west-2a]
+  jobs:
+  - name: web_ui
+    release: ardo
+    properties:
+      web_ui:
+        port: 9000
+  vm_type: t2.small
+  stemcell: default
+  networks:
+  - name: private
